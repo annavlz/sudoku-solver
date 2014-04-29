@@ -2,7 +2,7 @@
 
 ##Learning Competencies
 
-* Model a simple real-world system in Ruby code
+* Model a simple real-world system in application language code
 * Use Pseudocode effectively to model problem-solving
 
 ##Summary
@@ -63,12 +63,22 @@ Your Sudoku solver should take a string like this as its input:
 
 Each consecutive 9 digits represents a row of the Sudoku board, and a `0` represents an empty cell. It'd work like this:
 
+####Ruby
 ```ruby
 game = Sudoku.new('619030040270061008000047621486302079000014580031009060005720806320106057160400030')
 
 game.solve!
 
 puts game.board
+```
+
+###C&#35;
+```c#
+var game = new Sudoku("619030040270061008000047621486302079000014580031009060005720806320106057160400030");
+
+game.Solve();
+
+Console.WriteLine(game.Board);
 ```
 
 This would print something like this:
