@@ -43,15 +43,14 @@ It's important to see that sometimes the strategies that work for us (humans) wo
 
 #### Modeling: Pseudocode for First Iteration
 
-Remember, for the first iteration, we're just going build a solver that fills in "logically necessary" squares and requires no guessing. This might not solve every Sudoku board, although it often solves the easiest. How can you tell when you've filled in all the "logically necessary" squares?
+Remember, for the first iteration, we're just going build a solver that fills in "logically necessary" squares and requires no guessing. This might not solve every Sudoku board, although it often solves the easiest. How can you tell when you've filled in all the "logically necessary" squares? What steps that are part of your algorithm can be encapsulated into well-named methods?
 
-Write out pseudocode for this version, separately, and compare it to each other. How does it differ? Which approach seems more sound? Are there some core operations or methods you need to support?
+For example, one step in the process will likely be finding all the neighboring cell values for a current cell. This step can be broken down into at least three methods:
 
-For example, given a cell/square, you'll probably need at least three methods:
+    Return the cell values in a current cells's row.
+    Return the cell values in a current cells's column.
+    Return the cell values in a current cells's box.
 
-1. Give me the other cells in that cell's row.
-2. Give me the other cells in that cell's column.
-3. Give me the other cells in that cell's box.
 
 ###Release 1 :  Code it up!
 
