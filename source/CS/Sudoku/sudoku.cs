@@ -15,11 +15,15 @@ namespace Sudoku
         public void Solve()
         {
         }
+        
+        public void SolveStep()
+        {
+        }
 
         // Returns a string representing the current state of the board
         // Don't spend too much time on this method; flag someone from staff
         // if you are.
-        public string Board()
+        public override string ToString()
         {
             throw new NotImplementedException();
         }
