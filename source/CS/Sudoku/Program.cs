@@ -18,7 +18,7 @@ namespace Sudoku
             // Remember: this will just fill out what it can and not "guess"
             game.Solve();
 
-            Console.WriteLine(game.Board());
+            Console.WriteLine(game.ToString());
             Console.WriteLine("Press any key to close");
             Console.ReadKey();
 
