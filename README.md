@@ -117,3 +117,5 @@ Remember, always start with the simplest test case possible. For a Sudoku solver
 <!-- ##Optimize Your Learning -->
 
 ##Resources
+DID YOU READ RIGHT THROUGH THE README FIRST, BEFORE STARTING TO CODE?
+If you did and are the first to read this; you can find some chocolate hideing under the plant in the foyer!!!!!
