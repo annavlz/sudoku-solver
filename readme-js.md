@@ -62,14 +62,18 @@ Your Sudoku solver should take a string like this as its input:
 
 Each consecutive 9 digits represents a row of the Sudoku board, and a `0` represents an empty cell. It'd work like this:
 
-```ruby
-game = Sudoku.new('619030040270061008000047621486302079000014580031009060005720806320106057160400030')
+```javascript
+game = new Sudoku('619030040270061008000047621486302079000014580031009060005720806320106057160400030')
 
-game.solve!
+game.solve()
 
-puts game.board
+game.printBoard()
 ```
 
+Run your code in the terminal with node:
+```
+node source/JS/sudoku.js
+```
 
 This would print something like this:
 
@@ -99,7 +103,7 @@ Do *not* worry about performance yet! Optimizations can come later. Clean, logic
 
 ###Release 2 : Testing!
 
-Remember, always start with the simplest test case possible. For a Sudoku solver, what's the simplest case? (Besides being passed an already-solved board.) Working with a board that is only missing one number.
+Remember, always start with the **simplest test case possible**. For a Sudoku solver, what's the simplest case? (Besides being passed an already-solved board.) Working with a board that is only missing one number.
 
 ```
 609238745274561398853947621486352179792614583531879264945723816328196457167485932
