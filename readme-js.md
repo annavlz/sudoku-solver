@@ -115,4 +115,5 @@ Remember, always start with the **simplest test case possible**. For a Sudoku so
 
 ##Resources
 DID YOU READ RIGHT THROUGH THE README FIRST, BEFORE STARTING TO CODE?
-If you did and are the first to read this; you can find some chocolate hiding under the plant in the foyer!!!!!
+If you did and are the first to read this; you can find some tasty things hiding around the plant by the lifts!!!!!
+Of course, in future getting the full picture before you dive in won't give you such instant gratification, but it will save you a world of pain, and allow you to craft beautiful solutions...
