@@ -70,6 +70,8 @@ game.solve()
 game.printBoard()
 ```
 
+Find a skeleton of the sudoku solver script and sample boards inside this repo in the **source/JS/** folder.
+
 Run your code in the terminal with node:
 ```
 node source/JS/sudoku.js
