@@ -1,5 +1,31 @@
 var arr_diff = require('./array-diff.js')
 
+var findBox = function(position) {
+  var boxNum = Math.floor(position[0] / 3) * 3 + Math.floor(position[1] / 3)
+  return boxNum
+}
+
+var getBox = function(boxNum, board) {
+  var box = []
+  var boxes = {
+    0: [0,3,0,3],
+    1: [0,3,3,6],
+    2: [0,3,6,9],
+    3: [3,6,0,3],
+    4: [3,6,3,6],
+    5: [3,6,6,9],
+    6: [6,9,0,3],
+    7: [6,9,3,6],
+    8: [6,9,6,9]
+  }
+  var nums = boxes[boxNum]
+  for(var x = nums[0]; x < nums[1]; x++) {
+    for(var y = nums[2]; y < nums[3]; y++) {
+      box.push(board[x][y])
+    }
+  }
+  return box
+}
 
 var buildBoard = function(string) {
   var board = []
@@ -63,19 +89,51 @@ var checkColumn = function(board, position, rowSolutions) {
     }
   }
   columnSolutions = arr_diff(check, rowSolutions)
-  console.log(columnSolutions);
+}
+
+var checkBox = function(board, position, columnSolutions) {
+  var boxNum = findBox(position)
+  var boxNumbers = getBox(boxNum, board)
+  var boxSolutions = []
+  var check = []
+  for(var colNum = 0; colNum < columnSolutions.length; colNum++) {
+    for(var i = 0; i < 9; i++) {
+      if(columnSolutions[colNum] == boxNumbers[i]) {
+        check.push(boxNumbers[i])
+      }
+    }
+  }
+  boxSolutions = arr_diff(check, columnSolutions)
+  console.log(boxSolutions)
 }
 
 Sudoku = function(boardString) {
   this.boardString = boardString
   this.board = buildBoard(this.boardString)
+
 }
 
 Sudoku.prototype = {
   solve: function() {
     var position = definePosition(this.board)
     var rowSolutions = checkRow(this.board, position)
-    var columnSolutions = checkColumn(this.board, position, rowSolutions)
+    if(rowSolutions.length == 1) {
+      this.board[position[0]][position[1]] = rowSolutions[0]
+    } else {
+      var columnSolutions = checkColumn(this.board, position, rowSolutions)
+      if(columnSolutions.length == 1) {
+        this.board[position[0]][position[1]] = columnSolutions[0]
+      } else {
+        var boxSolutions = checkBox(this.board, position, columnSolutions)
+        if(boxSolutions.length == 1) {
+          this.board[position[0]][position[1]] = boxSolutions[0]
+        } else {
+          position = definePosition(this.board)
+          if(position.length == 0) {
+            this.solve()
+          }
+        }
+
 
   },
 
