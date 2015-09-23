@@ -51,8 +51,8 @@ var definePosition = function(board) {
           break
         }
       }
-      break
     }
+  // console.log(position);
   return position
 }
 
@@ -89,6 +89,7 @@ var checkColumn = function(board, position, rowSolutions) {
     }
   }
   columnSolutions = arr_diff(check, rowSolutions)
+  return columnSolutions
 }
 
 var checkBox = function(board, position, columnSolutions) {
@@ -104,7 +105,7 @@ var checkBox = function(board, position, columnSolutions) {
     }
   }
   boxSolutions = arr_diff(check, columnSolutions)
-  console.log(boxSolutions)
+  return boxSolutions
 }
 
 Sudoku = function(boardString) {
@@ -116,34 +117,41 @@ Sudoku = function(boardString) {
 Sudoku.prototype = {
   solve: function() {
     var position = definePosition(this.board)
-    var rowSolutions = checkRow(this.board, position)
-    if(rowSolutions.length == 1) {
-      this.board[position[0]][position[1]] = rowSolutions[0]
+    if(position.length == 0) {
+      this.showBoard()
     } else {
-      var columnSolutions = checkColumn(this.board, position, rowSolutions)
-      if(columnSolutions.length == 1) {
-        this.board[position[0]][position[1]] = columnSolutions[0]
+      var rowSolutions = checkRow(this.board, position)
+      if(rowSolutions.length == 1) {
+        this.board[position[0]][position[1]] = rowSolutions[0]
+        this.solve()
       } else {
-        var boxSolutions = checkBox(this.board, position, columnSolutions)
-        if(boxSolutions.length == 1) {
-          this.board[position[0]][position[1]] = boxSolutions[0]
+        var columnSolutions = checkColumn(this.board, position, rowSolutions)
+        if(columnSolutions.length == 1) {
+          this.board[position[0]][position[1]] = columnSolutions[0]
+          this.solve()
         } else {
-          position = definePosition(this.board)
-          if(position.length == 0) {
+          var boxSolutions = checkBox(this.board, position, columnSolutions)
+          if(boxSolutions.length == 1) {
+            this.board[position[0]][position[1]] = boxSolutions[0]
             this.solve()
+          } else {
+            // for(var i = 0; i < boxSolutions; i++) {
+              this.board[position[0]][position[1]] = boxSolutions[1]
+              this.solve()
+            // }
           }
         }
-
-
+      }
+    }
   },
 
   showBoard: function() {
-    // console.log(this.board)
+    console.log(this.board)
   }
 }
 
 
 
 game = new Sudoku('105802000090076405200400819019007306762083090000061050007600030430020501600308900')
-game.showBoard()
+// game.showBoard()
 game.solve()
