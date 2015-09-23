@@ -42,11 +42,11 @@ var buildBoard = function(string) {
   return board
 }
 
-var definePosition = function(board) {
+var definePosition = function(board, num) {
   var position = []
     for(var x = 0; x < 9; x++) {
       for(var y = 0; y < 9; y++) {
-        if(board[x][y] == '0') {
+        if(board[x][y] == num) {
           position = [x, y]
           break
         }
@@ -116,9 +116,61 @@ Sudoku = function(boardString) {
 
 Sudoku.prototype = {
   solve: function() {
-    var position = definePosition(this.board)
+    var position = definePosition(this.board, '0')
     if(position.length == 0) {
-      this.showBoard()
+      position = definePosition(this.board, '10')
+      if(position.length == 0) {
+        position = definePosition(this.board, '100')
+        if(position.length == 0) {
+        this.showBoard()
+        } else {
+          var rowSolutions = checkRow(this.board, position)
+          if(rowSolutions.length == 1) {
+            this.board[position[0]][position[1]] = rowSolutions[0]
+            this.solve()
+          } else {
+            var columnSolutions = checkColumn(this.board, position, rowSolutions)
+            if(columnSolutions.length == 1) {
+              this.board[position[0]][position[1]] = columnSolutions[0]
+              this.solve()
+            } else {
+              var boxSolutions = checkBox(this.board, position, columnSolutions)
+              if(boxSolutions.length == 1) {
+                this.board[position[0]][position[1]] = boxSolutions[0]
+                this.solve()
+              } else {
+                // for(var i = 0; i < boxSolutions; i++) {
+                  this.board[position[0]][position[1]] = 10
+                  this.solve()
+                // }
+              }
+            }
+          }
+        }
+      } else {
+        var rowSolutions = checkRow(this.board, position)
+        if(rowSolutions.length == 1) {
+          this.board[position[0]][position[1]] = rowSolutions[0]
+          this.solve()
+        } else {
+          var columnSolutions = checkColumn(this.board, position, rowSolutions)
+          if(columnSolutions.length == 1) {
+            this.board[position[0]][position[1]] = columnSolutions[0]
+            this.solve()
+          } else {
+            var boxSolutions = checkBox(this.board, position, columnSolutions)
+            if(boxSolutions.length == 1) {
+              this.board[position[0]][position[1]] = boxSolutions[0]
+              this.solve()
+            } else {
+              // for(var i = 0; i < boxSolutions; i++) {
+                this.board[position[0]][position[1]] = 100
+                this.solve()
+              // }
+            }
+          }
+        }
+      }
     } else {
       var rowSolutions = checkRow(this.board, position)
       if(rowSolutions.length == 1) {
@@ -136,7 +188,7 @@ Sudoku.prototype = {
             this.solve()
           } else {
             // for(var i = 0; i < boxSolutions; i++) {
-              this.board[position[0]][position[1]] = boxSolutions[1]
+              this.board[position[0]][position[1]] = 10
               this.solve()
             // }
           }
@@ -152,6 +204,6 @@ Sudoku.prototype = {
 
 
 
-game = new Sudoku('105802000090076405200400819019007306762083090000061050007600030430020501600308900')
+game = new Sudoku('005030081902850060600004050007402830349760005008300490150087002090000600026049503')
 // game.showBoard()
 game.solve()
