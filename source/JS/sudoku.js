@@ -59,16 +59,14 @@ var checkRow = function(board, position) {
   var row = board[position[0]]
   var solutions = []
   for(var num = 1; num < 10; num++) {
-    var numString = num.toString()
     var check = []
     for(var i = 0; i < 9; i++) {
-
-      if (numString !== row[i]) {
+      if (num != row[i]) {
         check.push(row[i])
       }
     }
     if (check.length == 9) {
-      solutions.push(numString)
+      solutions.push(num)
     }
   }
   return solutions
@@ -76,10 +74,10 @@ var checkRow = function(board, position) {
 
 var checkColumn = function(board, position, rowSolutions) {
   var column = []
+  var check = []
   for(var i = 0; i < 9; i++) {
     column.push(board[i][position[1]])
   }
-  var check = []
   for(var rowNum = 0; rowNum < rowSolutions.length; rowNum++) {
     for(var i = 0; i < 9; i++ ) {
       if(rowSolutions[rowNum] == column[i]) {
@@ -87,14 +85,13 @@ var checkColumn = function(board, position, rowSolutions) {
       }
     }
   }
-  columnSolutions = arr_diff(check, rowSolutions)
+  var columnSolutions = arr_diff(check, rowSolutions)
   return columnSolutions
 }
 
 var checkBox = function(board, position, columnSolutions) {
   var boxNum = findBox(position)
   var boxNumbers = getBox(boxNum, board)
-  var boxSolutions = []
   var check = []
   for(var colNum = 0; colNum < columnSolutions.length; colNum++) {
     for(var i = 0; i < 9; i++) {
@@ -103,7 +100,7 @@ var checkBox = function(board, position, columnSolutions) {
       }
     }
   }
-  boxSolutions = arr_diff(check, columnSolutions)
+  var boxSolutions = arr_diff(check, columnSolutions)
   return boxSolutions
 }
 
@@ -111,7 +108,6 @@ Sudoku = function(boardString) {
   this.boardString = boardString
   this.board = buildBoard(this.boardString)
   this.num = 0
-
 }
 
 Sudoku.prototype = {
@@ -148,13 +144,10 @@ Sudoku.prototype = {
       }
     }
   },
-
   showBoard: function() {
     console.log(this.board)
   }
 }
-
-
 
 game = new Sudoku('105802000090076405200400819019007306762083090000061050007600030430020501600308900')
 
