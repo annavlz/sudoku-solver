@@ -1,3 +1,3 @@
 
-#[Instructions here!](./readme-js.md)
+Sudoku solver
 
