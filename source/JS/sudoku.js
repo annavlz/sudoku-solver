@@ -124,17 +124,17 @@ Sudoku.prototype = {
     } else {
       var rowSolutions = checkRow(this.board, position)
       if(rowSolutions.length == 1) {
-        this.board[position[0]][position[1]] = rowSolutions[0]
+        this.board[position[0]][position[1]] = rowSolutions[0].toString()
         this.solve()
       } else {
         var columnSolutions = checkColumn(this.board, position, rowSolutions)
         if(columnSolutions.length == 1) {
-          this.board[position[0]][position[1]] = columnSolutions[0]
+          this.board[position[0]][position[1]] = columnSolutions[0].toString()
           this.solve()
         } else {
           var boxSolutions = checkBox(this.board, position, columnSolutions)
           if(boxSolutions.length == 1) {
-            this.board[position[0]][position[1]] = boxSolutions[0]
+            this.board[position[0]][position[1]] = boxSolutions[0].toString()
             this.solve()
           } else {
             this.board[position[0]][position[1]] = this.num + 10
